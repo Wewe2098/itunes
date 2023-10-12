@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+Run the app on https://comfy-valkyrie-a0178a.netlify.app/
+https://github.com/Wewe2098/itunes.git
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
