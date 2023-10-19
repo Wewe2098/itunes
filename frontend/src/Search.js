@@ -21,9 +21,14 @@ function Search() {
   };
 
   const handleRemoveFromFavorites = (item) => {
+    // Filter out the item to be removed from the favorites list
     const updatedFavorites = favorites.filter((favItem) => favItem.trackId !== item.trackId);
     setFavorites(updatedFavorites);
+  
+    // Update local storage to reflect the updated favorites list
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
+  
 
   useEffect(() => {
     // Save the favorites list in local storage for persistence

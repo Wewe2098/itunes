@@ -6,12 +6,14 @@ function FavoritesList({ favorites }) {
     <div className="favorites">
       <h2>Favorites</h2>
       <ul>
-        {favorites.map((item, index) => (
-          <li key={item.trackId}>
-            {item.trackName} - {item.artistName}
+        {favorites.map((favItem) => (
+          <li key={favItem.trackId}>
+            {favItem.trackName}
+            <button onClick={() => handleRemoveFromFavorites(favItem)}>Remove</button>
           </li>
         ))}
       </ul>
+
     </div>
   );
 }
