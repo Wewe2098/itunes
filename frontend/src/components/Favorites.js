@@ -1,7 +1,6 @@
-// frontend/src/FavoritesList.js
 import React from 'react';
 
-function FavoritesList({ favorites }) {
+function FavoritesList({ favorites, handleRemoveFromFavorites }) {
   return (
     <div className="favorites">
       <h2>Favorites</h2>
@@ -9,11 +8,10 @@ function FavoritesList({ favorites }) {
         {favorites.map((favItem) => (
           <li key={favItem.trackId}>
             {favItem.trackName}
-            <button onClick={() => handleRemoveFromFavorites(favItem)}>Remove</button>
+            <button onClick={() => handleRemoveFromFavorites(favItem.trackId)}>Remove</button>
           </li>
         ))}
       </ul>
-
     </div>
   );
 }

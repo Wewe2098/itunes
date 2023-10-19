@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import FavoritesList from './FavoritesList'; // Import the FavoritesList component
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -7,8 +8,16 @@ function Search() {
   const [searchResults, setSearchResults] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
+  const handleRemoveFromFavorites = (id) => {
+    const updatedFavorites = favorites.filter((favItem) => favItem.trackId !== id);
+    setFavorites(updatedFavorites);
+  };
+  
+
+  // Define the handleSearch function for searching
   const handleSearch = async () => {
     try {
+      // Make an API request to fetch search results
       const response = await axios.get(`/search?term=${searchTerm}&store=${store}`);
       setSearchResults(response.data);
     } catch (error) {
@@ -16,27 +25,13 @@ function Search() {
     }
   };
 
+  // Define the handleAddToFavorites function for adding items to favorites
   const handleAddToFavorites = (item) => {
     setFavorites([...favorites, item]);
   };
 
-  const handleRemoveFromFavorites = (item) => {
-    // Filter out the item to be removed from the favorites list
-    const updatedFavorites = favorites.filter((favItem) => favItem.trackId !== item.trackId);
-    setFavorites(updatedFavorites);
-  
-    // Update local storage to reflect the updated favorites list
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
-  
-
+  // Load favorites from local storage on page load
   useEffect(() => {
-    // Save the favorites list in local storage for persistence
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  useEffect(() => {
-    // Load favorites from local storage on page load
     const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     setFavorites(storedFavorites);
   }, []);
@@ -44,6 +39,7 @@ function Search() {
   return (
     <div>
       <div>
+        {/* Search input and options */}
         <input
           type="text"
           placeholder="Search"
@@ -57,6 +53,7 @@ function Search() {
         <button onClick={handleSearch}>Search</button>
       </div>
       <ul>
+        {/* Display search results */}
         {searchResults.map((result) => (
           <li key={result.trackId}>
             {result.trackName}
@@ -66,13 +63,15 @@ function Search() {
       </ul>
       <h2>Favorites</h2>
       <ul>
+        {/* Display favorites and provide a "Remove" button */}
         {favorites.map((favItem) => (
           <li key={favItem.trackId}>
             {favItem.trackName}
-            <button onClick={() => handleRemoveFromFavorites(favItem)}>Remove</button>
+            <button onClick={() => handleRemoveFromFavorites(favItem.trackId)}>Remove</button>
           </li>
         ))}
       </ul>
+      <FavoritesList favorites={favorites} handleRemoveFromFavorites={handleRemoveFromFavorites} />
     </div>
   );
 }
