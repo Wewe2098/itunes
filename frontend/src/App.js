@@ -1,13 +1,11 @@
-// App.js
 import React, { useState } from 'react';
 import SearchForm from './components/SearchForm';
-import FavoritesList from './components/Favorites';
+import FavoritesList from './components/FavoritesList'; 
 import './App.css';
-
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [mediaType, setMediaType] = useState('music,audiobook,video,movie');
+  const [mediaType, setMediaType] = useState('all');
   const [searchResults, setSearchResults] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -25,6 +23,12 @@ function App() {
     } catch (error) {
       console.error('Error searching iTunes:', error);
     }
+  };
+
+  // Define handleRemoveFromFavorites function to remove items from favorites
+  const handleRemoveFromFavorites = (id) => {
+    const updatedFavorites = favorites.filter((item) => item.trackId !== id);
+    setFavorites(updatedFavorites);
   };
 
   const addToFavorites = (item) => {
@@ -50,7 +54,7 @@ function App() {
           </div>
         ))}
       </div>
-      <FavoritesList favorites={favorites} />
+      <FavoritesList favorites={favorites} handleRemoveFromFavorites={handleRemoveFromFavorites} />
     </div>
   );
 }

@@ -1,19 +1,23 @@
-// Search.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FavoritesList from './FavoritesList';
 
 function Search() {
-  // Define state variables for search and favorites
-  const [searchTerm, setSearchTerm] = useState(''); // To store the search term
-  const [store, setStore] = useState('itunes'); // To store the selected store
-  const [searchResults, setSearchResults] = useState([]); // To store search results
-  const [favorites, setFavorites] = useState([]); // To store favorite items
+  const [searchTerm, setSearchTerm] = useState('');
+  const [store, setStore] = useState('itunes');
+  const [searchResults, setSearchResults] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
-  // Function to handle searching
+  const handleRemoveFromFavorites = (id) => {
+    const updatedFavorites = favorites.filter((favItem) => favItem.trackId !== id);
+    setFavorites(updatedFavorites);
+  };
+  
+
+  // Define the handleSearch function for searching
   const handleSearch = async () => {
     try {
-      // Make an API request to fetch search results based on the search term and store
+      // Make an API request to fetch search results
       const response = await axios.get(`/search?term=${searchTerm}&store=${store}`);
       setSearchResults(response.data);
     } catch (error) {
@@ -21,18 +25,10 @@ function Search() {
     }
   };
 
-  // Function to add an item to the favorites
+  // Define the handleAddToFavorites function for adding items to favorites
   const handleAddToFavorites = (item) => {
     setFavorites([...favorites, item]);
   };
-
-  // Function to remove an item from the favorites
-  const handleRemoveFromFavorites = (id) => {
-  // Filter out the item to be removed from the favorites list
-  const updatedFavorites = favorites.filter((favItem) => favItem.trackId !== id);
-  setFavorites(updatedFavorites);
-};
-
 
   // Load favorites from local storage on page load
   useEffect(() => {
@@ -57,7 +53,7 @@ function Search() {
         <button onClick={handleSearch}>Search</button>
       </div>
       <ul>
-        {/* Display search results and provide an "Add to Favorites" button */}
+        {/* Display search results */}
         {searchResults.map((result) => (
           <li key={result.trackId}>
             {result.trackName}
@@ -75,7 +71,7 @@ function Search() {
           </li>
         ))}
       </ul>
-      <FavoritesList favorites={favItem} handleRemoveFromFavorites={handleRemoveFromFavorites} />
+      <FavoritesList favorites={favorites} handleRemoveFromFavorites={handleRemoveFromFavorites} />
     </div>
   );
 }
