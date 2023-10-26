@@ -3,7 +3,7 @@ const app = express();
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
-const path = require('path'); // Import the 'path' module for serving static files
+const path = require('path'); 
 
 app.use(helmet.frameguard());
 app.use(bodyParser.json());
