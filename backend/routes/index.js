@@ -2,7 +2,6 @@ const express = require('express');
 const fetch = require('node-fetch');
 const router = express.Router();
 
-// Define a route to search iTunes and Apple Books
 router.get('/search', async (req, res) => {
    const term = req.query.term || ''; // Get the search term from the query parameter
    const media = req.query.mediaType || 'all'; // Default to searching all media types
@@ -21,7 +20,6 @@ router.get('/search', async (req, res) => {
    }
 });
 
-// Define a route for testing purposes with hardcoded values
 router.get('/searchTest', async (req, res) => {
    const term = 'Batman'; // Hardcoded search term
    const media = 'all'; // Hardcoded media type
