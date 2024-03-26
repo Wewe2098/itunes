@@ -1,64 +1,58 @@
-/* App Header */
-.App h1 {
-  font-size: 24px;
-  color: #333;
+.App {
+  text-align: center;
 }
 
-/* Search Form */
+.header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+}
+
 .search-form {
   margin-bottom: 20px;
 }
 
-.search-form input[type="text"] {
+.search-result {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
   padding: 10px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-.search-form select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.search-result p {
+  margin: 0;
 }
 
-.search-form button {
-  padding: 8px 16px;
+.search-result button {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
-/* Search Results */
-.search-results {
-  margin-top: 20px;
-}
-
-.search-results div {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f7f7f7;
-}
-
-/* Favorites List */
 .favorites {
   margin-top: 20px;
 }
 
 .favorites h2 {
-  font-size: 20px;
-  color: #333;
+  margin-bottom: 10px;
 }
 
 .favorites ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
 }
 
 .favorites li {
+  border: 1px solid #ddd;
   margin-bottom: 10px;
+  padding: 10px;
+}
+
+.favorites li button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }

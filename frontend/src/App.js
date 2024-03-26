@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import SearchForm from './components/SearchForm';
-import FavoritesList from './components/FavoritesList'; 
+import FavoritesList from './components/FavoritesList';
+
 import './App.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [mediaType, setMediaType] = useState('all');
+  const [mediaType, setMediaType] = useState('music');
   const [searchResults, setSearchResults] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -38,23 +39,27 @@ function App() {
 
   return (
     <div className="App">
-      <h1>iTunes Store Search</h1>
-      <SearchForm
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        mediaType={mediaType}
-        setMediaType={setMediaType}
-        handleSearch={handleSearch}
-      />
-      <div className="search-results">
-        {searchResults.map((result) => (
-          <div key={result.trackId}>
-            {result.trackName} - {result.artistName}
-            <button onClick={() => addToFavorites(result)}>Add to Favorites</button>
-          </div>
-        ))}
+      <header className="header">
+        <h1>iTunes Store Search</h1>
+        <SearchForm
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          mediaType={mediaType}
+          setMediaType={setMediaType}
+          handleSearch={handleSearch}
+        />
+      </header>
+      <div className="content">
+        <div className="search-results">
+          {searchResults.map((result) => (
+            <div key={result.trackId} className="search-result">
+              <p>{result.trackName} - {result.artistName}</p>
+              <button onClick={() => addToFavorites(result)}>Add to Favorites</button>
+            </div>
+          ))}
+        </div>
+        <FavoritesList favorites={favorites} handleRemoveFromFavorites={handleRemoveFromFavorites} />
       </div>
-      <FavoritesList favorites={favorites} handleRemoveFromFavorites={handleRemoveFromFavorites} />
     </div>
   );
 }
