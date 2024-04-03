@@ -10,6 +10,7 @@ function FavoritesList({ favorites, handleRemoveFromFavorites }) {
     <div className="favorites">
       <h2>Favorites</h2>
       <ul>
+        {/* Display list of favorites and provide remove button */}
         {favorites.map((favItem) => (
           <li key={favItem.trackId}>
             {favItem.trackName}
