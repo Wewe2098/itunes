@@ -1,6 +1,6 @@
-// frontend/src/SearchForm.js
 import React from 'react';
 
+// SearchForm component for inputting search terms and media type selection
 function SearchForm({
   searchTerm,
   setSearchTerm,
