@@ -2,14 +2,14 @@ const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const path = require('path');
-const apiRouter = require('./routes/api');
+const apiRouter = require('./routes/index'); 
 
 const app = express();
 app.use(helmet.frameguard());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api', apiRouter); // Mounting the API router
+app.use('/api', apiRouter); 
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
